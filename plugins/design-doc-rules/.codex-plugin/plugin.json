@@ -1,0 +1,22 @@
+{
+  "name": "design-doc-rules",
+  "version": "0.1.0",
+  "description": "Rules and a runnable checker that strip machine-flavoured prose from design documents, proposals, technical docs, and slide decks in Korean or English.",
+  "author": { "name": "yw0nam", "url": "https://github.com/yw0nam" },
+  "repository": "https://github.com/yw0nam/my_skills",
+  "license": "MIT",
+  "keywords": ["writing", "design-doc", "korean", "review"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Design Doc Rules",
+    "shortDescription": "Write design docs that read like a person wrote them.",
+    "longDescription": "Five sections of rules plus check.sh, a grep-based checker that flags machine-flavoured prose in Korean or English design documents, proposals, technical docs, and slide decks.",
+    "developerName": "yw0nam",
+    "category": "Productivity",
+    "capabilities": ["Write"],
+    "defaultPrompt": [
+      "Review this design doc against the design-doc rules.",
+      "Rewrite this section to pass check.sh."
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "yw0nam-skills",
+  "description": "Personal skill plugins for Claude Code and Codex",
+  "owner": { "name": "yw0nam", "url": "https://github.com/yw0nam" },
+  "plugins": [
+    {
+      "name": "design-doc-rules",
+      "source": "./plugins/design-doc-rules",
+      "description": "Strip machine-flavoured prose from design documents, in Korean or English.",
+      "version": "0.1.0",
+      "author": { "name": "yw0nam" },
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": ["writing", "design-doc", "korean", "review"]
+    }
+  ]
+}
