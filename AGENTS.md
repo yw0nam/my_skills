@@ -21,6 +21,16 @@ same `plugins/<plugin>/skills/<skill>/SKILL.md`. Layout and install commands are
    docs and types before concluding that a library lacks a feature.
 8. Make architecture decisions for the long term. A stopgap that gets replaced later is rejected.
 
+## Commits, PRs, and issues
+
+1. English. Commit subjects, PR titles and bodies, issue text, and every file in this repo are
+   written in English.
+2. Commit subject: `<type>: <summary>` in the imperative, under 72 characters. Types in use:
+   `feat`, `fix`, `docs`, `chore`.
+3. The history reads as hand-written. A commit message, PR body, issue, or code comment leaves out
+   "Generated with Claude Code" badges, `Co-Authored-By: Claude ...` trailers, and any sentence
+   reporting that Claude or Codex did the work.
+
 ## Project rules
 
 ### Paths that stay as they are
