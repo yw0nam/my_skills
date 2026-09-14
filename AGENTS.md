@@ -5,6 +5,10 @@ Personal skill repository. One repo serves two CLIs: Claude Code reads
 same `plugins/<plugin>/skills/<skill>/SKILL.md`. Layout and install commands are in
 [README.md](README.md).
 
+A request to install this repo means running the Install section of [README.md](README.md), which
+also pulls the upstream skills and plugins listed there. Adding an upstream skill means adding a
+row and its commands to that section.
+
 ## Working principles
 
 1. Before designing a solution, look at how established products solve the same problem. Adopt

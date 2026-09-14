@@ -1,27 +1,64 @@
 # my_skills
 
-Personal skill repository. One repo serves as both a Claude Code marketplace and a Codex
-marketplace. Both CLIs read the same `skills/<name>/SKILL.md` layout, so a skill body lives here
-once.
+Personal skill repository and the one place that installs every skill and plugin I use. The repo
+is a Claude Code marketplace and a Codex marketplace for its own plugins, and its install list
+pulls the rest from their upstream repos.
 
 ## Install
 
+Agents: when asked to install this repo, run every command below for each CLI that exists on the
+machine (`command -v claude`, `command -v codex`). A `marketplace add` that reports the marketplace
+already exists is fine; continue with the next command. Report each command that failed.
+
+| Skill or plugin | Upstream | Claude Code | Codex |
+|---|---|---|---|
+| `design-doc-rules` | this repo | plugin | plugin |
+| `ponytail` | [dietrichgebert/ponytail](https://github.com/dietrichgebert/ponytail) | plugin | plugin |
+| `agent-team` | [yw0nam/agent-team](https://github.com/yw0nam/agent-team) | plugin | not installed; it drives Codex from Claude Code |
+| `mattpocock-skills` | [mattpocock/skills](https://github.com/mattpocock/skills) | plugin | `npx skills` |
+| `karpathy-guidelines` | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | `npx skills` | `npx skills` |
+| `lieflat-charts` | [larashero3-dotcom/lieflat-charts](https://github.com/larashero3-dotcom/lieflat-charts) | `npx skills` | `npx skills` |
+
+Each row follows the install method its upstream README documents. Plugins keep their hooks and
+bundled binaries; repos that ship only `SKILL.md` go through [skills](https://github.com/vercel-labs/skills).
+
 Claude Code:
 
-```
-/plugin marketplace add yw0nam/my_skills
-/plugin install design-doc-rules@yw0nam-skills
+```bash
+claude plugin marketplace add yw0nam/my_skills
+claude plugin install design-doc-rules@yw0nam-skills
+claude plugin marketplace add DietrichGebert/ponytail
+claude plugin install ponytail@ponytail
+claude plugin marketplace add yw0nam/agent-team
+claude plugin install agent-team@yw0nam
+claude plugin install mattpocock-skills@claude-plugins-official
+npx -y skills add multica-ai/andrej-karpathy-skills --skill karpathy-guidelines -g -a claude-code -y
+npx -y skills add larashero3-dotcom/lieflat-charts --skill lieflat-charts -g -a claude-code -y
 ```
 
 Codex:
 
-```
+```bash
 codex plugin marketplace add yw0nam/my_skills
 codex plugin add design-doc-rules@yw0nam-skills
+codex plugin marketplace add DietrichGebert/ponytail
+codex plugin add ponytail@ponytail
+npx -y skills add multica-ai/andrej-karpathy-skills --skill karpathy-guidelines -g -a codex -y
+npx -y skills add larashero3-dotcom/lieflat-charts --skill lieflat-charts -g -a codex -y
+npx -y skills add mattpocock/skills -g -a codex -y --skill \
+  ask-matt diagnosing-bugs grill-with-docs triage improve-codebase-architecture \
+  setup-matt-pocock-skills tdd to-spec to-tickets wayfinder implement prototype research \
+  domain-modeling codebase-design code-review resolving-merge-conflicts wizard grill-me grilling \
+  handoff teach to-questionnaire wait-what writing-for-agents
 ```
 
-To update: `/plugin update` in Claude Code; `codex plugin marketplace upgrade` followed by
-`codex plugin add` in Codex.
+The `mattpocock/skills` list matches the skills its Claude Code plugin ships; the repo's
+`in-progress` and `misc` skills stay out. Ponytail's hooks need `node` on `PATH`, and Codex asks
+you to trust them once under `/hooks`.
+
+After install, restart the CLI. To update: `claude plugin marketplace update` then
+`claude plugin update <plugin>`; `codex plugin marketplace upgrade` then `codex plugin add`;
+`npx skills update -g` for the `npx skills` rows.
 
 ## Plugins
 
