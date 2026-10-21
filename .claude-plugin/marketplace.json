@@ -3,16 +3,17 @@
   "name": "yw0nam-skills",
   "description": "Personal skill plugins for Claude Code and Codex",
   "owner": { "name": "yw0nam", "url": "https://github.com/yw0nam" },
+  "allowCrossMarketplaceDependenciesOn": ["ponytail", "karpathy-skills", "yw0nam", "claude-plugins-official"],
   "plugins": [
     {
-      "name": "design-doc-rules",
-      "source": "./plugins/design-doc-rules",
-      "description": "Strip machine-flavoured prose from design documents, in Korean or English.",
+      "name": "dev-workflow",
+      "source": "./plugins/dev-workflow",
+      "description": "Orchestrated code-work workflow with a spec review gate; installs the skills it uses.",
       "version": "0.1.0",
       "author": { "name": "yw0nam" },
       "license": "MIT",
       "category": "productivity",
-      "keywords": ["writing", "design-doc", "korean", "review"]
+      "keywords": ["workflow", "spec-review", "delegation", "yagni"]
     }
   ]
 }

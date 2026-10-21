@@ -1,9 +1,0 @@
-{
-  "name": "design-doc-rules",
-  "version": "0.1.0",
-  "description": "Rules and a runnable checker that strip machine-flavoured prose from design documents, proposals, technical docs, and slide decks in Korean or English.",
-  "author": { "name": "yw0nam", "url": "https://github.com/yw0nam" },
-  "repository": "https://github.com/yw0nam/my_skills",
-  "license": "MIT",
-  "keywords": ["writing", "design-doc", "korean", "review"]
-}

@@ -40,7 +40,7 @@ row and its commands to that section.
 ### Paths that stay as they are
 
 1. The prose in a `SKILL.md` is hand-written. Fix typos and endings; a rewrite waits for a request.
-2. Plugin and skill directory names are the install id (`design-doc-rules@yw0nam-skills`). A rename
+2. Plugin and skill directory names are the install id (`dev-workflow@yw0nam-skills`). A rename
    breaks every install in the field. Add a plugin in place of renaming one.
 3. `~/.claude/skills/`, `~/.codex/skills/`, and `~/.codex/plugins/cache/` are install targets. Edits
    there vanish on the next install; sources live in this repo.

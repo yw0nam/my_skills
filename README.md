@@ -7,32 +7,31 @@ pulls the rest from their upstream repos.
 ## Install
 
 Agents: when asked to install this repo, run every command below for each CLI that exists on the
-machine (`command -v claude`, `command -v codex`). A `marketplace add` that reports the marketplace
-already exists is fine; continue with the next command. Report each command that failed.
+machine (`command -v claude`, `command -v codex`, `command -v opencode`, `command -v pi`). A
+`marketplace add` that reports the marketplace already exists is fine; continue with the next
+command. Report each command that failed.
 
-| Skill or plugin | Upstream | Claude Code | Codex |
-|---|---|---|---|
-| `design-doc-rules` | this repo | plugin | plugin |
-| `ponytail` | [dietrichgebert/ponytail](https://github.com/dietrichgebert/ponytail) | plugin | plugin |
-| `agent-team` | [yw0nam/agent-team](https://github.com/yw0nam/agent-team) | plugin | not installed; it drives Codex from Claude Code |
-| `mattpocock-skills` | [mattpocock/skills](https://github.com/mattpocock/skills) | plugin | `npx skills` |
-| `karpathy-guidelines` | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | `npx skills` | `npx skills` |
-| `lieflat-charts` | [larashero3-dotcom/lieflat-charts](https://github.com/larashero3-dotcom/lieflat-charts) | `npx skills` | `npx skills` |
+| Skill or plugin | Upstream | Claude Code | Codex | OpenCode, Pi |
+|---|---|---|---|---|
+| `dev-workflow` | this repo | plugin, installs the rows marked "dependency" | plugin | `npx skills` |
+| `ponytail` | [dietrichgebert/ponytail](https://github.com/dietrichgebert/ponytail) | dependency | plugin | `npx skills` |
+| `agent-team` | [yw0nam/agent-team](https://github.com/yw0nam/agent-team) | dependency | not installed; it drives Codex from Claude Code | not installed |
+| `mattpocock-skills` | [mattpocock/skills](https://github.com/mattpocock/skills) | dependency | `npx skills` | `npx skills` |
+| `karpathy-guidelines` | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | dependency | `npx skills` | `npx skills` |
+| `lieflat-charts` | [larashero3-dotcom/lieflat-charts](https://github.com/larashero3-dotcom/lieflat-charts) | `npx skills` | `npx skills` | not installed |
 
 Each row follows the install method its upstream README documents. Plugins keep their hooks and
 bundled binaries; repos that ship only `SKILL.md` go through [skills](https://github.com/vercel-labs/skills).
 
-Claude Code:
+Claude Code. A dependency installs only from a marketplace that is already added, so the four
+`marketplace add` lines run before `plugin install`:
 
 ```bash
-claude plugin marketplace add yw0nam/my_skills
-claude plugin install design-doc-rules@yw0nam-skills
 claude plugin marketplace add DietrichGebert/ponytail
-claude plugin install ponytail@ponytail
+claude plugin marketplace add multica-ai/andrej-karpathy-skills
 claude plugin marketplace add yw0nam/agent-team
-claude plugin install agent-team@yw0nam
-claude plugin install mattpocock-skills@claude-plugins-official
-npx -y skills add multica-ai/andrej-karpathy-skills --skill karpathy-guidelines -g -a claude-code -y
+claude plugin marketplace add yw0nam/my_skills
+claude plugin install dev-workflow@yw0nam-skills
 npx -y skills add larashero3-dotcom/lieflat-charts --skill lieflat-charts -g -a claude-code -y
 ```
 
@@ -40,7 +39,7 @@ Codex:
 
 ```bash
 codex plugin marketplace add yw0nam/my_skills
-codex plugin add design-doc-rules@yw0nam-skills
+codex plugin add dev-workflow@yw0nam-skills
 codex plugin marketplace add DietrichGebert/ponytail
 codex plugin add ponytail@ponytail
 npx -y skills add multica-ai/andrej-karpathy-skills --skill karpathy-guidelines -g -a codex -y
@@ -50,6 +49,16 @@ npx -y skills add mattpocock/skills -g -a codex -y --skill \
   setup-matt-pocock-skills tdd to-spec to-tickets wayfinder implement prototype research \
   domain-modeling codebase-design code-review resolving-merge-conflicts wizard grill-me grilling \
   handoff teach to-questionnaire wait-what writing-for-agents
+```
+
+OpenCode and Pi read `SKILL.md` but have no plugin dependencies, so each skill installs on its own:
+
+```bash
+npx -y skills add yw0nam/my_skills -g -a opencode -a pi -y --skill dev-workflow spec-review
+npx -y skills add DietrichGebert/ponytail --skill ponytail -g -a opencode -a pi -y
+npx -y skills add multica-ai/andrej-karpathy-skills --skill karpathy-guidelines -g -a opencode -a pi -y
+npx -y skills add mattpocock/skills -g -a opencode -a pi -y --skill \
+  grilling tdd diagnosing-bugs code-review research writing-for-agents
 ```
 
 The `mattpocock/skills` list matches the skills its Claude Code plugin ships; the repo's
@@ -64,8 +73,7 @@ After install, restart the CLI. To update: `claude plugin marketplace update` th
 
 | Name | What it does |
 |---|---|
-| `design-doc-rules` | Five sections of rules and a grep-based checker, `check.sh`, that strip machine-flavoured prose from design documents, proposals, technical docs, and slide decks in Korean or English |
-
+| `dev-workflow` | Two skills: `dev-workflow`, the orchestrated workflow for code work from survey to merge, and `spec-review`, a gate where a fresh reviewer asks of every spec item whether it is YAGNI, whether it pays for its code, and whether a simpler path exists. Installing it on Claude Code installs the skills the workflow names |
 ## Layout
 
 ```
@@ -81,7 +89,7 @@ plugins/<name>/
 
 1. Write `plugins/<name>/skills/<skill>/SKILL.md`. The frontmatter holds two fields, `name` and
    `description`.
-2. Copy the two manifests from `plugins/design-doc-rules` and edit the values. `version` in the Codex
+2. Copy the two manifests from `plugins/dev-workflow` and edit the values. `version` in the Codex
    manifest takes strict semver, and `interface` takes `displayName`, `shortDescription`,
    `longDescription`, `developerName`, `category`, `capabilities`, and `defaultPrompt`.
 3. Add an entry to both marketplace catalogs.

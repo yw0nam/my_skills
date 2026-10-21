@@ -3,8 +3,8 @@
   "interface": { "displayName": "yw0nam skills" },
   "plugins": [
     {
-      "name": "design-doc-rules",
-      "source": { "source": "local", "path": "./plugins/design-doc-rules" },
+      "name": "dev-workflow",
+      "source": { "source": "local", "path": "./plugins/dev-workflow" },
       "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
       "category": "Productivity"
     }
