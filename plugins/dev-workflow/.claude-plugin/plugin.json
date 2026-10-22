@@ -1,6 +1,6 @@
 {
   "name": "dev-workflow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Orchestrated code-work workflow with a spec review gate; installs the skills it uses.",
   "author": { "name": "yw0nam", "url": "https://github.com/yw0nam" },
   "repository": "https://github.com/yw0nam/my_skills",
@@ -9,7 +9,7 @@
   "dependencies": [
     "ponytail@ponytail",
     "andrej-karpathy-skills@karpathy-skills",
-    "agent-team@yw0nam",
+    "any-subagent@yw0nam",
     "mattpocock-skills@claude-plugins-official"
   ]
 }
