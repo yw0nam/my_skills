@@ -15,7 +15,7 @@ command. Report each command that failed.
 |---|---|---|---|---|
 | `dev-workflow` | this repo | plugin, installs the rows marked "dependency" | plugin | `npx skills` |
 | `ponytail` | [dietrichgebert/ponytail](https://github.com/dietrichgebert/ponytail) | dependency | plugin | `npx skills` |
-| `agent-team` | [yw0nam/agent-team](https://github.com/yw0nam/agent-team) | dependency | not installed; it drives Codex from Claude Code | not installed |
+| `any-subagent` | [yw0nam/any-subagent](https://github.com/yw0nam/any-subagent) | dependency | not installed; it drives Codex from Claude Code | not installed |
 | `mattpocock-skills` | [mattpocock/skills](https://github.com/mattpocock/skills) | dependency | `npx skills` | `npx skills` |
 | `karpathy-guidelines` | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | dependency | `npx skills` | `npx skills` |
 | `lieflat-charts` | [larashero3-dotcom/lieflat-charts](https://github.com/larashero3-dotcom/lieflat-charts) | `npx skills` | `npx skills` | not installed |
@@ -29,7 +29,7 @@ Claude Code. A dependency installs only from a marketplace that is already added
 ```bash
 claude plugin marketplace add DietrichGebert/ponytail
 claude plugin marketplace add multica-ai/andrej-karpathy-skills
-claude plugin marketplace add yw0nam/agent-team
+claude plugin marketplace add yw0nam/any-subagent
 claude plugin marketplace add yw0nam/my_skills
 claude plugin install dev-workflow@yw0nam-skills
 npx -y skills add larashero3-dotcom/lieflat-charts --skill lieflat-charts -g -a claude-code -y

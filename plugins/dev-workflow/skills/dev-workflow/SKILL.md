@@ -7,7 +7,7 @@ description: The orchestrated workflow for code work - survey, decision question
 
 The main session owns judgment: the spec, every decision, the final gate, pushes, PRs, and merges. Execution is delegated. The repository's own instruction files (`AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`) and its own workflow skill add the repo's commands, gates, and anti-patterns, and win where they differ from this skill.
 
-Skills named below come from the plugins this one installs: `karpathy-guidelines`, `ponytail`, `agent-team`, and mattpocock-skills (`grilling`, `tdd`, `diagnosing-bugs`, `code-review`, `research`). Load a skill at its step and follow its steps; a skill named in a brief or read about in a summary is not loaded. A subagent's brief tells it which skill to load first, and its report confirms the load. An external agent cannot load skills: write the rules it needs into its spec.
+Skills named below come from the plugins this one installs: `karpathy-guidelines`, `ponytail`, `any-subagent`, and mattpocock-skills (`grilling`, `tdd`, `diagnosing-bugs`, `code-review`, `research`). Load a skill at its step and follow its steps; a skill named in a brief or read about in a summary is not loaded. A subagent's brief tells it which skill to load first, and its report confirms the load. An external agent cannot load skills: write the rules it needs into its spec.
 
 ## Steps
 

@@ -7,7 +7,7 @@ description: Review a settled implementation spec for over-engineering before an
 
 A spec is the file-level plan for a change: what it adds, which files it edits, which tests it writes. Run this after the spec is settled and before the first edit.
 
-The reviewer is a fresh agent with none of this conversation. Ask the user which one to use for this run: a subagent, or an external agent reached through `agent-team`. You are the author. The user decides what stays contested.
+The reviewer is a fresh agent with none of this conversation. Ask the user which one to use for this run: a subagent, or an external agent reached through `any-subagent`. You are the author. The user decides what stays contested.
 
 ## Steps
 
