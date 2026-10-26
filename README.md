@@ -18,7 +18,6 @@ command. Report each command that failed.
 | `any-subagent` | [yw0nam/any-subagent](https://github.com/yw0nam/any-subagent) | dependency | not installed; it drives Codex from Claude Code | not installed |
 | `mattpocock-skills` | [mattpocock/skills](https://github.com/mattpocock/skills) | dependency | `npx skills` | `npx skills` |
 | `karpathy-guidelines` | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | dependency | `npx skills` | `npx skills` |
-| `lieflat-charts` | [larashero3-dotcom/lieflat-charts](https://github.com/larashero3-dotcom/lieflat-charts) | `npx skills` | `npx skills` | not installed |
 
 Each row follows the install method its upstream README documents. Plugins keep their hooks and
 bundled binaries; repos that ship only `SKILL.md` go through [skills](https://github.com/vercel-labs/skills).
@@ -32,7 +31,6 @@ claude plugin marketplace add multica-ai/andrej-karpathy-skills
 claude plugin marketplace add yw0nam/any-subagent
 claude plugin marketplace add yw0nam/my_skills
 claude plugin install dev-workflow@yw0nam-skills
-npx -y skills add larashero3-dotcom/lieflat-charts --skill lieflat-charts -g -a claude-code -y
 ```
 
 Codex:
@@ -43,7 +41,6 @@ codex plugin add dev-workflow@yw0nam-skills
 codex plugin marketplace add DietrichGebert/ponytail
 codex plugin add ponytail@ponytail
 npx -y skills add multica-ai/andrej-karpathy-skills --skill karpathy-guidelines -g -a codex -y
-npx -y skills add larashero3-dotcom/lieflat-charts --skill lieflat-charts -g -a codex -y
 npx -y skills add mattpocock/skills -g -a codex -y --skill \
   ask-matt diagnosing-bugs grill-with-docs triage improve-codebase-architecture \
   setup-matt-pocock-skills tdd to-spec to-tickets wayfinder implement prototype research \
