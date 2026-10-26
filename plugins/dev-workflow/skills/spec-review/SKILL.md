@@ -7,7 +7,17 @@ description: Review a settled implementation spec for over-engineering before an
 
 A spec is the file-level plan for a change: what it adds, which files it edits, which tests it writes. Run this after the spec is settled and before the first edit.
 
-The reviewer is a fresh agent with none of this conversation. Ask the user which one to use for this run: a subagent, or an external agent reached through `any-subagent`. You are the author. The user decides what stays contested.
+The reviewer is a fresh agent with none of this conversation: the one the user's role assignment names for spec review or spec consultation. Ask the user only when the assignment names none. You are the author. The user decides what stays contested.
+
+## Depth
+
+Pick the depth from the change before step 1. The first row that matches wins.
+
+| Depth | The change | Steps |
+|---|---|---|
+| Full | changes a contract, a wire format, persisted data, or a released config key; adds a module; or a revert cannot undo it | 1 to 5 |
+| Light | adds a file, a public symbol, or a config key, and a revert undoes it | 1 to 3, then 5 with no step 4: a rebutted row goes to the user as contested, with your evidence |
+| Skip | stays inside one existing module and adds no file, public symbol, or config key | none; tell the diff review's spec reviewer to look for defects in the spec as well |
 
 ## Steps
 
@@ -28,7 +38,7 @@ Send the reviewer exactly four things:
 
 Keep your reasoning and the alternatives you rejected out of the message. The reviewer finds its own alternatives in the code.
 
-Give the reviewer its own disposable checkout (a worktree at the spec's base) with dependencies installed. It runs tests, builds, and scripts there, and opens a library's types and docs to check a claim about its API.
+The reviewer works in the worktree the spec targets, before its first edit, with dependencies installed. It runs tests, builds, and scripts there, opens a library's types and docs to check a claim about its API, and leaves `git status` clean when it reports.
 
 A subagent's completion notice can cut its result short. When the result stops mid-table, ask the reviewer for the rest before you go on.
 
