@@ -1,6 +1,6 @@
 {
   "name": "dev-workflow",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Orchestrated code-work workflow with a spec review gate that cuts over-engineering before code is written.",
   "author": { "name": "yw0nam", "url": "https://github.com/yw0nam" },
   "repository": "https://github.com/yw0nam/my_skills",
