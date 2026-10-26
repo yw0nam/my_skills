@@ -60,7 +60,7 @@ Every non-documentation PR gets the two-axis review from mattpocock-skills' `cod
 
 You judge each finding. Fixes go to the implementer's session as new commits; a rejected finding gets its reason in the PR body.
 
-Done when every finding is fixed or rejected with a reason.
+Done when every finding is fixed or rejected with a reason, and a fresh reviewer has read the fix commits against the findings they answer.
 
 ### 7. PR and runtime evidence
 

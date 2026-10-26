@@ -1,6 +1,6 @@
 {
   "name": "dev-workflow",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Orchestrated code-work workflow with a spec review gate; installs the skills it uses.",
   "author": { "name": "yw0nam", "url": "https://github.com/yw0nam" },
   "repository": "https://github.com/yw0nam/my_skills",
