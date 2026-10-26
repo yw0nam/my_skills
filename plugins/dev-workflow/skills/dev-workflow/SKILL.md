@@ -33,7 +33,7 @@ Done when every task can be executed without a question back to you.
 
 ### 4. Spec review
 
-Run `spec-review` on the settled spec. A small change may skip it; then the diff review's spec reviewer is also told to look for defects in the spec itself.
+Run `spec-review` on the settled spec. It picks the depth from the change, skip included.
 
 Done when the spec-review result is applied and no row is contested.
 
