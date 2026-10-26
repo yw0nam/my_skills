@@ -34,6 +34,8 @@ These stay even when they cost code: validation at a trust boundary, error handl
 
 Run what settles a finding: the tests, the type checker, a build, a throwaway script. A measured result is the strongest evidence you can cite. The checkout is yours to change and break.
 
+A spec item that rests on a library's runtime semantics (routing, state visibility, commit timing) gets a throwaway script that measures it.
+
 Keep every side effect inside the checkout. A measurement that would touch the user's running apps, accounts, real data, network services, or git remotes goes in the finding as `needs measurement`, with the exact command, for the author to run.
 
 ## Settled decisions
