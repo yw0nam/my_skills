@@ -27,7 +27,7 @@ Done when the user says to proceed. Their decision stands until they change it.
 
 ### 3. Spec
 
-You write it, one file per batch, one section per task: branch, worktree path, files and line numbers, the change, the test that must fail, the commit title. The implementer sees only the spec and the repo, so write what and where. Two tasks that edit one file are ordered: the second starts on the first's commit. Mark each user decision as an owner decision. Keep the spec out of the repo.
+You write it, one file per batch, one section per task: branch, worktree path, files and line numbers, the change, the test that must fail, the commit title, the review tier (step 6). The implementer sees only the spec and the repo, so write what and where. Two tasks that edit one file are ordered: the second starts on the first's commit. Mark each user decision as an owner decision. Keep the spec out of the repo.
 
 Done when every task can be executed without a question back to you.
 
@@ -56,7 +56,17 @@ Done when the implementer's report is in and its gates passed.
 
 ### 6. Independent review
 
-Every non-documentation PR gets the two-axis review from mattpocock-skills' `code-review`: standards (the repo's instruction files) and spec (the originating issue), each by a separate fresh subagent at least as strong as the implementer. Give each reviewer the intent and about five points to check (read timing of dependencies, other callers, whether the test is truly red, rule compliance). The reviewer reads every changed line, translation files included. A documentation PR gets one review, unless all three hold:
+A code PR gets the review of its tier, which the spec names per task. A tier changed later gets its reason in the PR body.
+
+- **Ship: no independent review.** You read every changed line yourself. All three hold: nothing a user, the backend, or another process can observe changes (a deletion of code with no caller, a rename, a comment, log text, a narrower type, a dependency patch bump); the compiler and the gates prove no reference is left, and the PR body cites the grep or language-server lookup for each caller; nothing touches the contract docs, stored keys, capabilities, IPC, process spawning, or the network.
+- **Single: one fresh reviewer** checks the standards and the spec together. The behaviour change stays inside one module with no exchange changed, ships with its red test, and adds no module or interface; or the PR is a pure deletion of a path with nothing replacing it, breaking ones included.
+- **Two-axis: everything else.** A new module, interface, or exchange; a contract or transport behaviour change; work across windows; timing or concurrency; native window APIs; security (capabilities, IPC, process spawning, network). It gets the two-axis review from mattpocock-skills' `code-review`: standards (the repo's instruction files) and spec (the originating issue), each by a separate fresh subagent.
+
+Who wrote the code does not set the tier: a delegated PR ships when it meets Ship and you read its diff. The review tier and the runtime evidence (step 7) are decided apart.
+
+A reviewer is at least as strong as the implementer. Give each reviewer the intent and about five points to check (read timing of dependencies, other callers, whether the test is truly red, rule compliance). The reviewer reads every changed line, translation files included.
+
+A documentation PR gets one review, unless all three hold:
 
 - every changed line is prose: docs, glossary, instruction files. No code, config, test, or CI file;
 - every sentence it adds is a user decision from the session, or a fact you checked with a lookup and cite in the PR body as file:line;
