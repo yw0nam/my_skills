@@ -1,6 +1,6 @@
 {
   "name": "dev-workflow",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Orchestrated code-work workflow with a spec review gate that cuts over-engineering before code is written.",
   "author": { "name": "yw0nam", "url": "https://github.com/yw0nam" },
   "repository": "https://github.com/yw0nam/my_skills",
@@ -10,7 +10,7 @@
   "interface": {
     "displayName": "Dev Workflow",
     "shortDescription": "Spec, spec review, delegate, review, PR.",
-    "longDescription": "The dev-workflow skill runs code work from survey through decision questions, spec, spec review, delegated implementation, two-axis review, PR, and runtime evidence. The spec-review skill has a fresh reviewer ask of every spec item whether it is YAGNI, whether it pays for its code, and whether a simpler path exists.",
+    "longDescription": "The dev-workflow skill runs code work from survey through decision questions, spec, spec review, delegated implementation, tiered review, PR, and runtime evidence. The spec-review skill has a fresh reviewer ask of every spec item whether it is YAGNI, whether it pays for its code, and whether a simpler path exists.",
     "developerName": "yw0nam",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
