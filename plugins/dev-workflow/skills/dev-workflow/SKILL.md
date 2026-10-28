@@ -56,7 +56,13 @@ Done when the implementer's report is in and its gates passed.
 
 ### 6. Independent review
 
-Every non-documentation PR gets the two-axis review from mattpocock-skills' `code-review`: standards (the repo's instruction files) and spec (the originating issue), each by a separate fresh subagent at least as strong as the implementer. Give each reviewer the intent and about five points to check (read timing of dependencies, other callers, whether the test is truly red, rule compliance). The reviewer reads every changed line, translation files included. A documentation PR gets one review.
+Every non-documentation PR gets the two-axis review from mattpocock-skills' `code-review`: standards (the repo's instruction files) and spec (the originating issue), each by a separate fresh subagent at least as strong as the implementer. Give each reviewer the intent and about five points to check (read timing of dependencies, other callers, whether the test is truly red, rule compliance). The reviewer reads every changed line, translation files included. A documentation PR gets one review, unless all three hold:
+
+- every changed line is prose: docs, glossary, instruction files. No code, config, test, or CI file;
+- every sentence it adds is a user decision from the session, or a fact you checked with a lookup and cite in the PR body as file:line;
+- the gates pass.
+
+Then it skips review. A docs refresh whose claims were not traced one by one, or a reference doc that describes code behaviour without a citation, still gets its review.
 
 You judge each finding. Fixes go to the implementer's session as new commits; a rejected finding gets its reason in the PR body.
 
