@@ -28,7 +28,7 @@ For each behaviour the spec changes, find where it lands: every caller, every in
 
 ## Matchers
 
-A spec item that classifies text by a pattern (a regex, a keyword list, a status-code match) names the input it reads and what a match triggers. Check both: feed it the widest input it will see in production (a whole event stream, a tool's output, a quoted file) and price a false match (a retry, a billed turn, a deleted file). A matcher that reads more than the signal it needs is a finding.
+A spec item that classifies text by a pattern (a regex, a keyword list, a status-code match) must name the input it reads; one that does not is `unclear`. Feed the matcher the widest input it will see in production (a whole event stream, a tool's output, a quoted file). When that input can produce a false match whose action costs something (a retry, a billed turn, a deleted file), report it as **wide matcher** and state the cost.
 
 ## Keep
 
@@ -62,7 +62,7 @@ Keep it under 800 words.
    | ID | Question | Finding | Evidence | Proposed change |
    |---|---|---|---|---|
 
-   Question is one of `YAGNI`, `ROI`, `simpler path`, `alternative design`, `missing reach`, `wrong claim`, `unclear`, `needs measurement`.
+   Question is one of `YAGNI`, `ROI`, `simpler path`, `alternative design`, `missing reach`, `wide matcher`, `wrong claim`, `unclear`, `needs measurement`.
 3. **Cut list**: the item IDs to remove, and the smallest version of the spec that still meets the requirement end to end, in one paragraph.
 
 ## Rebuttal round
