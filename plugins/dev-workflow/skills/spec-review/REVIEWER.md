@@ -26,6 +26,10 @@ Read the repository's `AGENTS.md`, `CLAUDE.md`, and `CONTRIBUTING.md`. Their rul
 
 For each behaviour the spec changes, find where it lands: every caller, every instance or window that runs it, every test and fixture, every config and export. A spec that misses a place the change reaches is incomplete; report it as **missing reach** with the `file:line`. Laziness applies to the solution, never to the reach.
 
+## Matchers
+
+A spec item that classifies text by a pattern (a regex, a keyword list, a status-code match) must name the input it reads; one that does not is `unclear`. Feed the matcher the widest input it will see in production (a whole event stream, a tool's output, a quoted file). When that input can produce a false match whose action costs something (a retry, a billed turn, a deleted file), report it as **wide matcher** and state the cost.
+
 ## Keep
 
 These stay even when they cost code: validation at a trust boundary, error handling that prevents data loss, security and permission checks, accessibility, and anything the requirement asks for in its own words.
@@ -58,7 +62,7 @@ Keep it under 800 words.
    | ID | Question | Finding | Evidence | Proposed change |
    |---|---|---|---|---|
 
-   Question is one of `YAGNI`, `ROI`, `simpler path`, `alternative design`, `missing reach`, `wrong claim`, `unclear`, `needs measurement`.
+   Question is one of `YAGNI`, `ROI`, `simpler path`, `alternative design`, `missing reach`, `wide matcher`, `wrong claim`, `unclear`, `needs measurement`.
 3. **Cut list**: the item IDs to remove, and the smallest version of the spec that still meets the requirement end to end, in one paragraph.
 
 ## Rebuttal round

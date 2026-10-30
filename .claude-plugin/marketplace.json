@@ -9,7 +9,7 @@
       "name": "dev-workflow",
       "source": "./plugins/dev-workflow",
       "description": "Orchestrated code-work workflow with a spec review gate; installs the skills it uses.",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "author": { "name": "yw0nam" },
       "license": "MIT",
       "category": "productivity",
