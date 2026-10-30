@@ -26,6 +26,10 @@ Read the repository's `AGENTS.md`, `CLAUDE.md`, and `CONTRIBUTING.md`. Their rul
 
 For each behaviour the spec changes, find where it lands: every caller, every instance or window that runs it, every test and fixture, every config and export. A spec that misses a place the change reaches is incomplete; report it as **missing reach** with the `file:line`. Laziness applies to the solution, never to the reach.
 
+## Matchers
+
+A spec item that classifies text by a pattern (a regex, a keyword list, a status-code match) names the input it reads and what a match triggers. Check both: feed it the widest input it will see in production (a whole event stream, a tool's output, a quoted file) and price a false match (a retry, a billed turn, a deleted file). A matcher that reads more than the signal it needs is a finding.
+
 ## Keep
 
 These stay even when they cost code: validation at a trust boundary, error handling that prevents data loss, security and permission checks, accessibility, and anything the requirement asks for in its own words.
