@@ -23,7 +23,7 @@ This is a prompt-driven skill: explore, ask, show the final drafts, wait for con
 | `templates/github/workflows/pr-title.yml` | `.github/workflows/pr-title.yml` | the user picks the `pr-title` gate |
 | `templates/github/workflows/test-guard.yml`, `templates/scripts/ci/test-guard.sh` | `.github/workflows/test-guard.yml`, `scripts/ci/test-guard.sh` (mode `755`) | the user picks the `test-guard` gate |
 
-A `{{fill: ...}}` marker names what to put in its place. A `{{variant: ...}}` ... `{{/variant}}` block is kept or deleted whole, by the user's answer; a gate's variant stays only when the user picks that gate. A fill with no value is deleted with its line. No marker survives into a written file.
+A `{{fill: ...}}` marker names what to put in its place. A `{{variant: ...}}` ... `{{/variant}}` block is kept or deleted whole, by the user's answer; a gate's variant stays only when the user picks that gate. A fill with no value is deleted; a fill that fills its whole line is deleted with the line. Deleting a block leaves no doubled blank line. No marker survives into a written file.
 
 ## Steps
 
@@ -68,7 +68,7 @@ Write the confirmed drafts. Then:
 
 - Give `scripts/ci/test-guard.sh` mode `755`.
 - Check the result: `grep -rnE '\{\{(fill|variant|/variant)' AGENTS.md CLAUDE.md CONTRIBUTING.md docs .github scripts` prints nothing, every written `.yml` parses, and `bash -n scripts/ci/test-guard.sh` passes when the gate was added.
-- List each label the templates name that `gh label list` lacks (`bug`, `feature`, `spike`, `decision`, `breaking`, plus `skip-tests` with the `test-guard` gate), with the `gh label create <name>` command for each. Creating labels changes the GitHub repository, so run the commands only when the user says to.
+- List each label the templates name that `gh label list` lacks (`bug`, `feature`, `spike`, `decision`, `breaking`, plus `skip-tests` with the `test-guard` gate), with the `gh label create <name>` command for each. When `gh` cannot reach the repository, list them all. Creating labels changes the GitHub repository, so run the commands only when the user says to.
 - When a CI gate was added, tell the user to mark its check as required in the branch protection rules of `main`.
 
 Done when the files are written and the user has the label and branch protection steps.
