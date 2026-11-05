@@ -15,6 +15,8 @@ Skills named below come from the plugins this one installs: `karpathy-guidelines
 
 Read the open issues and PRs that touch the work. Split code exploration across subagents and keep only their conclusions; give an evaluating subagent its judgment criterion in the prompt ("a refactor needs a concrete pain"), or cosmetic findings mix in. Look up facts yourself or through subagents; the user answers decisions, not facts.
 
+A repository with no `AGENTS.md` or `CONTRIBUTING.md` has no rules for this workflow to read: offer the user `setup-repo` first.
+
 Done when you can state what exists, what is missing, and which decisions the user must make.
 
 ### 2. Decision questions
