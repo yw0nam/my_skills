@@ -28,10 +28,6 @@ Issue and PR bodies carry two kinds of claims, and each has an evidence gate. An
 - Quantitative claims (line counts, edit-site counts, blast radius, "N modules to add one value") are measured, with the measurement named: `wc -l`, `git show --name-only <commit>`, a grep count. A number without its measurement is rejected.
 - Outcome promises ("bug class Y stops recurring") stay out of issue bodies and PR descriptions. Promise mechanisms and deletions verifiable at PR time.
 
-## Pull requests as a triage surface
-
-PRs as a request surface: no. `/triage` reads this flag.
-
 ## When a skill says "publish to the issue tracker"
 
 Create a GitHub issue.

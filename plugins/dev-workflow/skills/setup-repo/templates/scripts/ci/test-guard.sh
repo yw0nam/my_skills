@@ -14,7 +14,7 @@ fi
 
 is_test_path() {
   case "$1" in
-    {{fill: test path globs, e.g. *.test.ts | */tests/* | *_test.go | */test_*.py}}) return 0 ;;
+    {{fill: test path globs, e.g. *.test.ts | tests/* | */tests/* | *_test.go | test_*.py | */test_*.py}}) return 0 ;;
     *) return 1 ;;
   esac
 }
@@ -29,7 +29,13 @@ is_source_path() {
 src_added=0
 test_changed=0
 
-# Three-dot diff: only what this branch adds over the merge base.
+# Three-dot diff: only what this branch adds over the merge base. --no-renames prints the new
+# path in place of "{old => new}"; quotePath=false keeps non-ASCII names unquoted.
+diff=$(git -c core.quotePath=false diff --numstat --no-renames "$BASE"...HEAD) || {
+  echo "test-guard: cannot diff against $BASE" >&2
+  exit 2
+}
+
 while read -r added _ f; do
   [ -z "$f" ] && continue
   if is_test_path "$f"; then
@@ -38,7 +44,7 @@ while read -r added _ f; do
     case "$added" in '-') added=0 ;; esac
     src_added=$((src_added + added))
   fi
-done < <(git diff --numstat "$BASE"...HEAD)
+done <<< "$diff"
 
 if [ "$src_added" -le "$THRESHOLD" ] || [ "$test_changed" = "1" ]; then
   echo "test-guard: ${src_added} source line(s) added, test changed: ${test_changed} - ok"

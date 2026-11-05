@@ -11,6 +11,9 @@ This is the single contributor guide. [`AGENTS.md`](AGENTS.md) carries the proje
   ```
 
 - New or changed behaviour ships its test in the same PR. Commit the failing test first as its own `test:` commit, then the implementation (`feat:` or `fix:`), then any `refactor:`. [`docs/agent-guide/testing.md`](docs/agent-guide/testing.md) holds the test rules.
+{{variant: test-guard gate}}
+  The `test-guard` CI job fails a PR that adds more than 20 source lines and changes no test file. The `skip-tests` label bypasses it for a test-free change (rename, config-only, generated code).
+{{/variant}}
 - Write issues, issue comments, PR titles and PR bodies in English. Chat in any language.
 - Verify observable behaviour yourself ({{fill: the evidence this project produces, e.g. a screenshot of the app window, the app-run log, an API response, pod logs}}) and paste the output in the PR's Runtime evidence section. Ask the user only for what requires them.
 
@@ -26,7 +29,7 @@ The contracts are {{fill: what other code or other people depend on, e.g. the co
 {{variant: only the user uses the repository}}
 A PR that drops or replaces a contract deletes the old path outright: no compat layer, fallback, warning or migration. The PR:
 
-- marks its title with `!` (`feat!:`, `fix!:`) and carries the `breaking` label, which lists it under breaking changes in the release notes;
+- marks its title with `!` (`feat!:`, `fix!:`) and carries the `breaking` label;
 - names in its body what was removed and what replaces it;
 - updates every doc that describes the path, in the same PR.
 {{/variant}}
@@ -58,7 +61,8 @@ A review checks every diff against the rules in `AGENTS.md`, the rules above, an
 - Outside input is untrusted. Input from users, the network or another process reaches the core only after a shape and vocabulary check. An unknown value takes a defined fallback.
 - Races. Async, poll and teardown code is checked at the entry and the exit of every state: a poll that fires after shutdown, a waiter that never settles, a worker that writes after release.
 - One source for the contract. Every consumer reads the one definition of a contract.
-{{fill: one line per project-specific trap, e.g. "No hardcoding. Endpoints, models and paths come from `configs/`."}}
+- No hardcoding. Endpoints, credentials, models and paths come from {{fill: where configuration lives, e.g. `configs/`, environment variables, chart values}}.
+{{fill: one line per project-specific trap}}
 
 ## Finding your way
 
@@ -74,6 +78,9 @@ Open an issue with the matching template in `.github/ISSUE_TEMPLATE/`: bug, feat
 
 ## Commits and PRs
 
+{{variant: pr-title gate}}
+- The `pr-title` CI job checks the conventional type and an ASCII subject, and fails a PR body with a line starting with `Co-Authored-By:` or `Generated with`.
+{{/variant}}
 - Use conventional commits: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `chore:`, `revert:`. The PR title is the squash-merge subject and uses the same format.
 - Fill the [PR template](.github/PULL_REQUEST_TEMPLATE.md): Summary (with a why-this-value line for every new constant, threshold or special-cased status), related issues, related decisions, Runtime evidence, Merge danger and the checklist.
 

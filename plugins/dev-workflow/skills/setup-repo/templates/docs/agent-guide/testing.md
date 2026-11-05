@@ -6,7 +6,7 @@ Read before writing or changing a test. These rules cover what review judges; li
 
 A test earns its place by what its failure means: a behaviour a user sees, a contract, a config schema, a wire frame, or an exported function's documented result is broken. A test whose failure means none of these is noise and is not written.
 
-Not tested: an implementation constant's value in isolation (a value that is itself a documented contract is a contract), a library's or the platform's behaviour, a call on an internal helper, a call on a collaborator that no caller can observe, and a fact a sibling test already asserts. A collaborator call is observable when it crosses the module's external boundary: OS, network, UI, audio or storage I/O; a dependency passed in as an argument is one way that boundary is exposed.
+Not tested: an implementation constant's value in isolation (a value that is itself a documented contract is a contract), a library's or the platform's behaviour, a call on an internal helper, a call on a collaborator that no caller can observe, and a fact a sibling test already asserts. A collaborator call is observable when it crosses the module's external boundary: OS, network, UI or storage I/O; a dependency passed in as an argument is one way that boundary is exposed.
 
 The same setup with another input is a row in the sibling's parameterised table, not a new test. A file's test count is not a measure of coverage.
 
@@ -29,7 +29,7 @@ The same setup with another input is a row in the sibling's parameterised table,
 
 ## Existing tests
 
-9. An existing test is never deleted, skipped, or loosened to turn a run green. When behaviour changes on purpose, the PR summary lists each changed assertion and its reason. A PR that touches a test file folds duplicate tests while keeping every distinct behaviour and contract covered, deletes a test that pins neither, and lists each deleted test with its reason.
+9. An existing test is never deleted, skipped, or loosened to turn a run green. When behaviour changes on purpose, the PR summary lists each changed assertion and its reason. A test that meets § What a test is for may always be written. A PR that touches a test file repairs or folds its tests while keeping every distinct behaviour and contract covered, and deletes a test that pins neither; a failing assertion is never removed in place of fixing the behaviour or revising its contract on purpose. The PR summary lists each deleted test with its reason.
 
 ## Mocks and outside services
 

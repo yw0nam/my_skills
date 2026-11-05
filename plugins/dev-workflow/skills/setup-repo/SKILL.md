@@ -13,8 +13,8 @@ This is a prompt-driven skill: explore, ask, show the final drafts, wait for con
 
 | Template | Target | When |
 |---|---|---|
-| `templates/AGENTS.md` | `AGENTS.md` | always |
-| `templates/CLAUDE.md` | `CLAUDE.md` | always |
+| `templates/AGENTS.md.tmpl` | `AGENTS.md` | always |
+| `templates/CLAUDE.md.tmpl` | `CLAUDE.md` | always |
 | `templates/CONTRIBUTING.md` | `CONTRIBUTING.md` | always |
 | `templates/docs/agent-guide/testing.md` | `docs/agent-guide/testing.md` | always |
 | `templates/docs/agents/issue-tracker.md` | `docs/agents/issue-tracker.md` | always |
@@ -23,7 +23,7 @@ This is a prompt-driven skill: explore, ask, show the final drafts, wait for con
 | `templates/github/workflows/pr-title.yml` | `.github/workflows/pr-title.yml` | the user picks the `pr-title` gate |
 | `templates/github/workflows/test-guard.yml`, `templates/scripts/ci/test-guard.sh` | `.github/workflows/test-guard.yml`, `scripts/ci/test-guard.sh` (mode `755`) | the user picks the `test-guard` gate |
 
-A `{{fill: ...}}` marker names what to put in its place. A `{{variant: ...}}` ... `{{/variant}}` block is kept or deleted whole, by the user's answer. No marker survives into a written file.
+A `{{fill: ...}}` marker names what to put in its place. A `{{variant: ...}}` ... `{{/variant}}` block is kept or deleted whole, by the user's answer; a gate's variant stays only when the user picks that gate. A fill with no value is deleted with its line. No marker survives into a written file.
 
 ## Steps
 
@@ -56,15 +56,19 @@ Done when the user answers.
 
 For each target, show the final text: the template with every marker filled and the variant chosen. For a file that exists, show the merged result. A section the template and the file both have keeps the file's repo-specific lines and gains the template's rules. A section only the file has stays. When the file and the template state opposite rules, ask which one stands.
 
+- An issue template in Markdown (`.github/ISSUE_TEMPLATE/bug.md`) that shares a name with a form template is merged into the `.yml` form and deleted, so the chooser lists each kind once.
+- `CLAUDE.md`'s `### Domain docs` block stays only when a glossary exists, and points at the real file.
+- A worktree path inside the repository gains its folder in `.gitignore`.
+
 Done when the user confirms the drafts. Their edits go into what you write.
 
 ### 4. Write
 
 Write the confirmed drafts. Then:
 
-- Keep `CLAUDE.md`'s `### Domain docs` block only when a glossary exists, and point it at the real file.
 - Give `scripts/ci/test-guard.sh` mode `755`.
-- List each label the templates name that `gh label list` lacks (`bug`, `feature`, `spike`, `decision`, plus `breaking` and `skip-tests` when used), with the `gh label create <name>` command for each. Creating labels changes the GitHub repository, so run the commands only when the user says to.
+- Check the result: `grep -rnE '\{\{(fill|variant|/variant)' AGENTS.md CLAUDE.md CONTRIBUTING.md docs .github scripts` prints nothing, every written `.yml` parses, and `bash -n scripts/ci/test-guard.sh` passes when the gate was added.
+- List each label the templates name that `gh label list` lacks (`bug`, `feature`, `spike`, `decision`, `breaking`, plus `skip-tests` with the `test-guard` gate), with the `gh label create <name>` command for each. Creating labels changes the GitHub repository, so run the commands only when the user says to.
 - When a CI gate was added, tell the user to mark its check as required in the branch protection rules of `main`.
 
 Done when the files are written and the user has the label and branch protection steps.
