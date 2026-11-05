@@ -51,7 +51,7 @@ npx -y skills add mattpocock/skills -g -a codex -y --skill \
 OpenCode and Pi read `SKILL.md` but have no plugin dependencies, so each skill installs on its own:
 
 ```bash
-npx -y skills add yw0nam/my_skills -g -a opencode -a pi -y --skill dev-workflow spec-review
+npx -y skills add yw0nam/my_skills -g -a opencode -a pi -y --skill dev-workflow spec-review setup-repo
 npx -y skills add DietrichGebert/ponytail --skill ponytail -g -a opencode -a pi -y
 npx -y skills add multica-ai/andrej-karpathy-skills --skill karpathy-guidelines -g -a opencode -a pi -y
 npx -y skills add mattpocock/skills -g -a opencode -a pi -y --skill \
@@ -70,7 +70,7 @@ After install, restart the CLI. To update: `claude plugin marketplace update` th
 
 | Name | What it does |
 |---|---|
-| `dev-workflow` | Two skills: `dev-workflow`, the orchestrated workflow for code work from survey to merge, and `spec-review`, a gate where a fresh reviewer asks of every spec item whether it is YAGNI, whether it pays for its code, and whether a simpler path exists. Installing it on Claude Code installs the skills the workflow names |
+| `dev-workflow` | Three skills: `dev-workflow`, the orchestrated workflow for code work from survey to merge; `spec-review`, a gate where a fresh reviewer asks of every spec item whether it is YAGNI, whether it pays for its code, and whether a simpler path exists; and `setup-repo`, which writes the engineering principles, testing rules, tracker conventions, GitHub templates, and optional CI gates into a repository (`/dev-workflow:setup-repo` on Claude Code). Installing it on Claude Code installs the skills the workflow names |
 ## Layout
 
 ```
