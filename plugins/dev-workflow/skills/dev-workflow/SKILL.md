@@ -43,7 +43,7 @@ Done when the spec-review result is applied and no row is contested.
 
 Work in a git worktree; the change lands through a PR. Pick the implementer by difficulty (the user's role assignment names the models). A change of a few lines in a few files you make yourself.
 
-The brief is self-contained: absolute worktree path, rule files to read, the spec section, gate commands, commit title, "no push, no PR", and the report form (Summary, Changes, Verification, Notes, in the tracker's language). It carries the coding rules:
+The brief is self-contained: absolute worktree path, rule files to read, the spec section, gate commands, commit title, "no push, no PR", and the report form (Summary, Changes, Verification, Notes, in the tracker's language), sent once as the final reply. It carries the coding rules:
 
 - Load `ponytail` while writing code: the smallest complete change, reuse before writing, every caller and test reached.
 - Load `tdd`: seams first, then vertical slices. The failing test is its own `test:` commit, then `feat:`, then `refactor:` when needed.
