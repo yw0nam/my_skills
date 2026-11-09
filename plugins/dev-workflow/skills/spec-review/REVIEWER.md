@@ -26,6 +26,8 @@ Read the repository's `AGENTS.md`, `CLAUDE.md`, and `CONTRIBUTING.md`. Their rul
 
 For each behaviour the spec changes, find where it lands: every caller, every instance or window that runs it, every test and fixture, every config and export. A spec that misses a place the change reaches is incomplete; report it as **missing reach** with the `file:line`. Laziness applies to the solution, never to the reach.
 
+For each call the spec makes to an external API (an identity provider's admin API, a cloud API, another service), find in that API's docs or source the permission or role the call needs, and check that the spec grants it to the identity that makes the call. For each UI mock the spec follows, check that every action the mock shows is one the API allows for the user who sees it. A permission the call needs that the spec does not grant, or a mock action the API refuses, is **missing reach**, with the API route or the mock element named.
+
 ## Matchers
 
 A spec item that classifies text by a pattern (a regex, a keyword list, a status-code match) must name the input it reads; one that does not is `unclear`. Feed the matcher the widest input it will see in production (a whole event stream, a tool's output, a quoted file). When that input can produce a false match whose action costs something (a retry, a billed turn, a deleted file), report it as **wide matcher** and state the cost.
