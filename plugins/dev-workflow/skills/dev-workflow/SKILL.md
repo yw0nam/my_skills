@@ -93,6 +93,7 @@ Delete the worktree and branch. Write a handoff: done, user decisions, remaining
 ## Standing rules
 
 - Delegate execution, never judgment. Use subagents, never a forked copy of the main session, as implementers.
+- Respect the user's view, and push back where a standard or a better method says otherwise: name what is wrong or weaker, say why with evidence (a measurement, a `file:line`, a documented standard), and discuss it until the user decides. Agreeing without that check is a failure, and so is retreating from a sound position because the user questioned it.
 - Report every side effect on the user's machine: stray clicks, leftover tabs, changed settings, crash reports.
 - Production data and keys change only with the user's explicit confirmation. The user runs key operations; you verify by status codes.
 - Issues, PRs, commits, and code comments follow the repository's language; chat follows the user's.
