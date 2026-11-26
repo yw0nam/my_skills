@@ -74,7 +74,7 @@ git log -S'<token>' --reverse
 
 ## Reporting issues
 
-Open an issue with the matching template in `.github/ISSUE_TEMPLATE/`: bug, feature / task, spike or decision.
+Open an issue with the matching template in {{fill: `.github/ISSUE_TEMPLATE/` on GitHub, or `.gitlab/issue_templates/` on GitLab}}: bug, feature / task, spike or decision.
 
 ## Commits and PRs
 
@@ -82,7 +82,7 @@ Open an issue with the matching template in `.github/ISSUE_TEMPLATE/`: bug, feat
 - The `pr-title` CI job checks the conventional type and an ASCII subject, and fails a PR body with a line starting with `Co-Authored-By:` or `Generated with`.
 {{/variant}}
 - Use conventional commits: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `chore:`, `revert:`. The PR title is the squash-merge subject and uses the same format.
-- Fill the [PR template](.github/PULL_REQUEST_TEMPLATE.md): Summary (with a why-this-value line for every new constant, threshold or special-cased status), related issues, related decisions, Runtime evidence, Merge danger and the checklist.
+- Fill the [review template]({{fill: `.github/PULL_REQUEST_TEMPLATE.md` on GitHub, or `.gitlab/merge_request_templates/Default.md` on GitLab}}): Summary (with a why-this-value line for every new constant, threshold or special-cased status), related issues, related decisions, Runtime evidence, Merge danger and the checklist.
 
 ## Before you open a PR
 

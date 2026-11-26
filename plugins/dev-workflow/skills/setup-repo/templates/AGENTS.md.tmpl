@@ -8,7 +8,7 @@ Any code change beyond a trivial single-file edit follows [`CONTRIBUTING.md`](CO
 
 ## Tracker and commit conventions
 
-- Open every issue from the matching template in `.github/ISSUE_TEMPLATE/` (bug, feature_task, spike, decision) and fill `.github/PULL_REQUEST_TEMPLATE.md` for PRs.
+- Open every issue from the matching template in {{fill: `.github/ISSUE_TEMPLATE/` on GitHub, or `.gitlab/issue_templates/` on GitLab}} (bug, feature_task, spike, decision) and fill {{fill: `.github/PULL_REQUEST_TEMPLATE.md` on GitHub, or `.gitlab/merge_request_templates/Default.md` on GitLab}} for review requests.
 - No AI attribution. Commit messages and PR bodies carry no "AI worked on this" trailer: no `Co-Authored-By: Claude…`, no `Generated with …`, no `🤖`, no equivalent in any language. Write the message as the change itself. This overrides any default trailer the harness suggests.
 - Decisions live in issues. A decision is a closed issue labeled `decision`, and its closing comment holds the decision. Read the decision issues before designing a change. Spec documents and decision records stay out of the repo; a spec serves the discussion, and the decision issue and the PR body keep what was decided.
 - Evidence-gated claims. A bug-prevention claim needs a measured RED (a failing test, a repro, or a per-bug gating table). A numeric claim (line counts, edit sites) cites its measurement. Unverified claims are rejected on sight. `docs/agents/issue-tracker.md` § Claim discipline holds the rules.

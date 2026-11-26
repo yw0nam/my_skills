@@ -5,7 +5,7 @@ description: The orchestrated workflow for code work - survey, decision question
 
 # Development workflow
 
-The main session owns judgment: the spec, every decision, the final gate, pushes, PRs, and merges. Execution is delegated. The repository's own instruction files (`AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`) and its own workflow skill add the repo's commands, gates, and anti-patterns, and win where they differ from this skill.
+The main session owns judgment: the spec, every decision, the final gate, pushes, the PR or MR, and merges. Execution is delegated. The repository's own instruction files (`AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`) and its own workflow skill add the repo's commands, gates, and anti-patterns, and win where they differ from this skill.
 
 Skills named below come from the plugins this one installs: `karpathy-guidelines`, `ponytail`, `any-subagent`, and mattpocock-skills (`grilling`, `tdd`, `diagnosing-bugs`, `code-review`, `research`). Load a skill at its step and follow its steps; a skill named in a brief or read about in a summary is not loaded. A subagent's brief tells it which skill to load first, and its report confirms the load. An external agent cannot load skills: write the rules it needs into its spec.
 
@@ -13,9 +13,9 @@ Skills named below come from the plugins this one installs: `karpathy-guidelines
 
 ### 1. Survey
 
-Read the open issues and PRs that touch the work. Split code exploration across subagents and keep only their conclusions; give an evaluating subagent its judgment criterion in the prompt ("a refactor needs a concrete pain"), or cosmetic findings mix in. Look up facts yourself or through subagents; the user answers decisions, not facts.
+Read the open issues and PR/MRs that touch the work. Split code exploration across subagents and keep only their conclusions; give an evaluating subagent its judgment criterion in the prompt ("a refactor needs a concrete pain"), or cosmetic findings mix in. Look up facts yourself or through subagents; the user answers decisions, not facts.
 
-A repository with no `AGENTS.md` or `CONTRIBUTING.md` has no rules for this workflow to read: offer the user `setup-repo` first.
+Read the repository's `docs/agents/issue-tracker.md`: it names the forge and the CLI (`gh` or `glab`) that every tracker and review command below uses. A repository with no `AGENTS.md`, `CONTRIBUTING.md`, or `docs/agents/issue-tracker.md` has no rules for this workflow to read: offer the user `setup-repo` first.
 
 Done when you can state what exists, what is missing, and which decisions the user must make.
 
@@ -41,7 +41,7 @@ Done when the spec-review result is applied and no row is contested.
 
 ### 5. Delegate
 
-Work in a git worktree; the change lands through a PR. Pick the implementer by difficulty (the user's role assignment names the models). A change of a few lines in a few files you make yourself.
+Work in a git worktree; the change lands through a PR/MR. Pick the implementer by difficulty (the user's role assignment names the models). A change of a few lines in a few files you make yourself.
 
 The brief is self-contained: absolute worktree path, rule files to read, the spec section, gate commands, commit title, "no push, no PR", and the report form (Summary, Changes, Verification, Notes, in the tracker's language). It carries the coding rules:
 
@@ -58,31 +58,31 @@ Done when the implementer's report is in and its gates passed.
 
 ### 6. Independent review
 
-A code PR gets the review of its tier, which the spec names per task. A tier changed later gets its reason in the PR body.
+A code PR/MR gets the review of its tier, which the spec names per task. A tier changed later gets its reason in the PR/MR body.
 
-- **Ship: no independent review.** You read every changed line yourself. All three hold: nothing a user, the backend, or another process can observe changes (a deletion of code with no caller, a rename, a comment, log text, a narrower type, a dependency patch bump); the compiler and the gates prove no reference is left, and the PR body cites the grep or language-server lookup for each caller; nothing touches the contract docs, stored keys, capabilities, IPC, process spawning, or the network.
-- **Single: one fresh reviewer** checks the standards and the spec together. The behaviour change stays inside one module with no exchange changed, ships with its red test, and adds no module or interface; or the PR is a pure deletion of a path with nothing replacing it, breaking ones included.
+- **Ship: no independent review.** You read every changed line yourself. All three hold: nothing a user, the backend, or another process can observe changes (a deletion of code with no caller, a rename, a comment, log text, a narrower type, a dependency patch bump); the compiler and the gates prove no reference is left, and the PR/MR body cites the grep or language-server lookup for each caller; nothing touches the contract docs, stored keys, capabilities, IPC, process spawning, or the network.
+- **Single: one fresh reviewer** checks the standards and the spec together. The behaviour change stays inside one module with no exchange changed, ships with its red test, and adds no module or interface; or the PR/MR is a pure deletion of a path with nothing replacing it, breaking ones included.
 - **Two-axis: everything else.** A new module, interface, or exchange; a contract or transport behaviour change; work across windows; timing or concurrency; native window APIs; security (capabilities, IPC, process spawning, network). It gets the two-axis review from mattpocock-skills' `code-review`: standards (the repo's instruction files) and spec (the originating issue), each by a separate fresh subagent.
 
-Who wrote the code does not set the tier: a delegated PR ships when it meets Ship and you read its diff. The review tier and the runtime evidence (step 7) are decided apart.
+Who wrote the code does not set the tier: a delegated PR/MR ships when it meets Ship and you read its diff. The review tier and the runtime evidence (step 7) are decided apart.
 
 A reviewer is at least as strong as the implementer. Give each reviewer the intent and about five points to check (read timing of dependencies, other callers, whether the test is truly red, rule compliance). The reviewer reads every changed line, translation files included.
 
-A documentation PR gets one review, unless all three hold:
+A documentation PR/MR gets one review, unless all three hold:
 
 - every changed line is prose: docs, glossary, instruction files. No code, config, test, or CI file;
-- every sentence it adds is a user decision from the session, or a fact you checked with a lookup and cite in the PR body as file:line;
+- every sentence it adds is a user decision from the session, or a fact you checked with a lookup and cite in the PR/MR body as file:line;
 - the gates pass.
 
 Then it skips review. A docs refresh whose claims were not traced one by one, or a reference doc that describes code behaviour without a citation, still gets its review.
 
-You judge each finding. Fixes go to the implementer's session as new commits; a rejected finding gets its reason in the PR body.
+You judge each finding. Fixes go to the implementer's session as new commits; a rejected finding gets its reason in the PR/MR body.
 
 Done when every finding is fixed or rejected with a reason.
 
-### 7. PR and runtime evidence
+### 7. PR/MR and runtime evidence
 
-Push and open a draft PR yourself. Verify what is observable (rendering, DOM state, logs) yourself, through a separate verification subagent that runs the real app; ask the user only for checks that need them, as one fixed checklist. A bug fix cites its red test; a behaviour change cites a run log. Evidence not yet gathered is marked pending. Before merging, check each load-bearing claim of the implementer and the reviewers in the code yourself; anything unchecked stays written as unverified.
+Push and open a draft PR or MR with the tracker doc's CLI (`gh pr create --draft`, `glab mr create --draft`). Verify what is observable (rendering, DOM state, logs) yourself, through a separate verification subagent that runs the real app; ask the user only for checks that need them, as one fixed checklist. A bug fix cites its red test; a behaviour change cites a run log. Evidence not yet gathered is marked pending. Before merging, check each load-bearing claim of the implementer and the reviewers in the code yourself; anything unchecked stays written as unverified.
 
 Done when the evidence is attached, the user approves, and the PR is merged.
 
@@ -96,4 +96,4 @@ Delete the worktree and branch. Write a handoff: done, user decisions, remaining
 - Respect the user's view, and push back where a standard or a better method says otherwise: name what is wrong or weaker, say why with evidence (a measurement, a `file:line`, a documented standard), and discuss it until the user decides. Agreeing without that check is a failure, and so is retreating from a sound position because the user questioned it.
 - Report every side effect on the user's machine: stray clicks, leftover tabs, changed settings, crash reports.
 - Production data and keys change only with the user's explicit confirmation. The user runs key operations; you verify by status codes.
-- Issues, PRs, commits, and code comments follow the repository's language; chat follows the user's.
+- Issues, PR/MRs, commits, and code comments follow the repository's language; chat follows the user's.
