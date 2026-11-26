@@ -20,7 +20,7 @@
      Blast radius: what a defect breaks, in one line. -->
 
 ## Checklist
-- [ ] New or changed behavior ships a test in this MR, committed failing first as its own `test:` commit (or the `skip-tests` label justified)
+- [ ] New or changed behavior ships a test in this MR, committed failing first as its own `test:` commit
 - [ ] Runtime evidence attached above, or N/A justified
 - [ ] No unverified assumptions: upstream docs and the running behavior checked first
 - [ ] A breaking change carries `!` in the title and the `breaking` label

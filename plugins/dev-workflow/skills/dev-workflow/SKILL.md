@@ -1,6 +1,6 @@
 ---
 name: dev-workflow
-description: The orchestrated workflow for code work - survey, decision questions, spec, spec review, worktree, delegated implementation, independent review, PR, runtime evidence. Load before writing, changing, reviewing, or delegating code in any repository, for any change beyond a trivial single-file edit.
+description: The orchestrated workflow for code work - survey, decision questions, spec, spec review, worktree, delegated implementation, independent review, PR/MR, runtime evidence. Load before writing, changing, reviewing, or delegating code in any repository, for any change beyond a trivial single-file edit.
 ---
 
 # Development workflow
@@ -13,7 +13,7 @@ Skills named below come from the plugins this one installs: `karpathy-guidelines
 
 ### 1. Survey
 
-Read the open issues and PR/MRs that touch the work. Split code exploration across subagents and keep only their conclusions; give an evaluating subagent its judgment criterion in the prompt ("a refactor needs a concrete pain"), or cosmetic findings mix in. Look up facts yourself or through subagents; the user answers decisions, not facts.
+Read the open issues and PRs or MRs that touch the work. Split code exploration across subagents and keep only their conclusions; give an evaluating subagent its judgment criterion in the prompt ("a refactor needs a concrete pain"), or cosmetic findings mix in. Look up facts yourself or through subagents; the user answers decisions, not facts.
 
 Read the repository's `docs/agents/issue-tracker.md`: it names the forge and the CLI (`gh` or `glab`) that every tracker and review command below uses. A repository with no `AGENTS.md`, `CONTRIBUTING.md`, or `docs/agents/issue-tracker.md` has no rules for this workflow to read: offer the user `setup-repo` first.
 
@@ -43,7 +43,7 @@ Done when the spec-review result is applied and no row is contested.
 
 Work in a git worktree; the change lands through a PR/MR. Pick the implementer by difficulty (the user's role assignment names the models). A change of a few lines in a few files you make yourself.
 
-The brief is self-contained: absolute worktree path, rule files to read, the spec section, gate commands, commit title, "no push, no PR", and the report form (Summary, Changes, Verification, Notes, in the tracker's language). It carries the coding rules:
+The brief is self-contained: absolute worktree path, rule files to read, the spec section, gate commands, commit title, "no push, no PR/MR", and the report form (Summary, Changes, Verification, Notes, in the tracker's language). It carries the coding rules:
 
 - Load `ponytail` while writing code: the smallest complete change, reuse before writing, every caller and test reached.
 - Load `tdd`: seams first, then vertical slices. The failing test is its own `test:` commit, then `feat:`, then `refactor:` when needed.
@@ -84,7 +84,7 @@ Done when every finding is fixed or rejected with a reason.
 
 Push and open a draft PR or MR with the tracker doc's CLI (`gh pr create --draft`, `glab mr create --draft`). Verify what is observable (rendering, DOM state, logs) yourself, through a separate verification subagent that runs the real app; ask the user only for checks that need them, as one fixed checklist. A bug fix cites its red test; a behaviour change cites a run log. Evidence not yet gathered is marked pending. Before merging, check each load-bearing claim of the implementer and the reviewers in the code yourself; anything unchecked stays written as unverified.
 
-Done when the evidence is attached, the user approves, and the PR is merged.
+Done when the evidence is attached, the user approves, and the PR/MR is merged.
 
 ### 8. Wrap-up
 
@@ -96,4 +96,4 @@ Delete the worktree and branch. Write a handoff: done, user decisions, remaining
 - Respect the user's view, and push back where a standard or a better method says otherwise: name what is wrong or weaker, say why with evidence (a measurement, a `file:line`, a documented standard), and discuss it until the user decides. Agreeing without that check is a failure, and so is retreating from a sound position because the user questioned it.
 - Report every side effect on the user's machine: stray clicks, leftover tabs, changed settings, crash reports.
 - Production data and keys change only with the user's explicit confirmation. The user runs key operations; you verify by status codes.
-- Issues, PR/MRs, commits, and code comments follow the repository's language; chat follows the user's.
+- Issues, PRs or MRs, commits, and code comments follow the repository's language; chat follows the user's.

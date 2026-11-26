@@ -10,7 +10,7 @@
   "interface": {
     "displayName": "Dev Workflow",
     "shortDescription": "Spec, spec review, delegate, review, PR.",
-    "longDescription": "The dev-workflow skill runs code work from survey through decision questions, spec, spec review, delegated implementation, tiered review, PR, and runtime evidence. The spec-review skill has a fresh reviewer ask of every spec item whether it is YAGNI, whether it pays for its code, and whether a simpler path exists. The setup-repo skill writes the engineering principles, testing rules, tracker conventions, GitHub templates, and optional CI gates into a repository.",
+    "longDescription": "The dev-workflow skill runs code work from survey through decision questions, spec, spec review, delegated implementation, tiered review, PR, and runtime evidence. The spec-review skill has a fresh reviewer ask of every spec item whether it is YAGNI, whether it pays for its code, and whether a simpler path exists. The setup-repo skill writes the engineering principles, testing rules, tracker conventions, GitHub or GitLab templates, and optional CI gates into a repository.",
     "developerName": "yw0nam",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],

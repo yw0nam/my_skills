@@ -6,11 +6,11 @@ Issues for this repo live as GitLab issues. Use the `glab` CLI for all operation
 
 - Create an issue: `glab issue create --title "..." --description "..."`, with a heredoc for multi-line descriptions. Open every issue from the matching template in `.gitlab/issue_templates/` (bug, feature_task, spike, decision); the template's `/label` line applies the label.
 - Read an issue: `glab issue view <number> --comments`. Use `--output json` for machine-readable output.
-- List issues: `glab issue list -O json`, with `--label` and `--closed` filters.
+- List issues: `glab issue list --output json`, with `--label` and `--closed` filters.
 - Comment on an issue: `glab issue note <number> --message "..."`. GitLab calls comments notes.
 - Apply or remove labels: `glab issue update <number> --label "..."` / `--unlabel "..."`.
 - Close: `glab issue close <number>` takes no comment. Post the closing text first with `glab issue note`, then close.
-- Merge requests: GitLab calls PRs merge requests (MRs). `glab mr create`, `glab mr view`, `glab mr note`, and `glab mr merge` take the same verbs as their `gh pr` counterparts. Create an MR as a draft with `glab mr create --draft`.
+- Merge requests: GitLab calls PRs merge requests (MRs). `gh pr create`, `gh pr view`, and `gh pr merge` map to `glab mr create`, `glab mr view`, and `glab mr merge`; `gh pr comment` maps to `glab mr note`, and its `--body` flag maps to `--message`. Create an MR as a draft with `glab mr create --draft`.
 
 GitLab numbers issues (`#n`) and MRs (`!n`) separately. Write `!n` for an MR and `#n` for an issue.
 
@@ -39,6 +39,16 @@ Issue and MR bodies carry two kinds of claims, and each has an evidence gate. An
 - Quantitative claims (line counts, edit-site counts, blast radius, "N modules to add one value") are measured, with the measurement named: `wc -l`, `git show --name-only <commit>`, a grep count. A number without its measurement is rejected.
 - Outcome promises ("bug class Y stops recurring") stay out of issue bodies and MR descriptions. Promise mechanisms and deletions verifiable at MR time.
 
+## Merge requests as a triage surface
+
+**MRs as a request surface: no.** _(Set to `yes` if this repo treats external merge requests as feature requests; `/triage` reads this flag.)_
+
+When set to `yes`, MRs run through the same labels and states as issues, using the `glab mr` equivalents:
+
+- Read an MR: `glab mr view <number> --comments` and `glab mr diff <number>` for the diff.
+- List external MRs for triage: `glab mr list --output json`, then keep only MRs whose author is not a project member or owner (a contributor's MR, not a maintainer's in-flight work).
+- Comment, label, close: `glab mr note`, `glab mr update --label` / `--unlabel`, `glab mr close`.
+
 ## When a skill says "publish to the issue tracker"
 
 Create a GitLab issue.
@@ -46,3 +56,14 @@ Create a GitLab issue.
 ## When a skill says "fetch the relevant ticket"
 
 Run `glab issue view <number> --comments`.
+
+## Wayfinding operations
+
+Used by `/wayfinder`. The **map** is a single issue with **child** issues as tickets.
+
+- **Map**: a single issue labelled `wayfinder:map`, holding the Notes / Decisions-so-far / Fog body. `glab issue create --label wayfinder:map`.
+- **Child ticket**: an issue carrying `Part of #<map>` at the top of its description and labels `wayfinder:<type>` (`research`/`prototype`/`grilling`/`task`). Once claimed, the ticket is assigned to the driving dev.
+- **Blocking**: the free plan has no native blocking link, so a `Blocked by: #<n>, #<n>` line at the top of the child's description records it. A ticket is unblocked when every blocker is closed.
+- **Frontier query**: `glab issue list --output json` scoped to the map's children. Drop any with an open issue named in its `Blocked by` line, or with an assignee; the first in map order wins.
+- **Claim**: `glab issue update <n> --assignee @me`, the session's first write.
+- **Resolve**: `glab issue note <n> --message "<answer>"`, then `glab issue close <n>`, then append a context pointer (gist + link) to the map's Decisions-so-far.

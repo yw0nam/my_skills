@@ -28,7 +28,7 @@ This is a prompt-driven skill: explore, ask, show the final drafts, wait for con
 
 GitLab gets no CI files: GitLab CI is designed per repository.
 
-A `{{fill: ...}}` marker names what to put in its place. A `{{variant: ...}}` ... `{{/variant}}` block is kept or deleted whole, by the user's answer; a gate's variant stays only when the user picks that gate. A fill with no value is deleted; a fill that fills its whole line is deleted with the line. Deleting a block leaves no doubled blank line. No marker survives into a written file.
+A `{{fill: ...}}` marker names what to put in its place. A `{{variant: ...}}` ... `{{/variant}}` block is kept or deleted whole, by the user's answer; a gate's variant stays only when the user picks that gate. A fill with no value is deleted; a fill that fills its whole line is deleted with the line. Deleting a block leaves no doubled blank line. No marker survives into a written file. On GitLab, the written files say MR wherever a template says PR for the review unit; the templates are shared, not forked.
 
 ## Steps
 
@@ -36,8 +36,8 @@ A `{{fill: ...}}` marker names what to put in its place. A `{{variant: ...}}` ..
 
 Read what exists. Assume nothing.
 
-- `git remote get-url origin`: the forge. A `github.com` host means GitHub; any other host means GitLab, confirmed with `glab auth status --hostname <host>`. When neither CLI knows the host, ask the user. Take the `<owner>/<repo>` or project path from the same URL for template links and CLI commands.
-- `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, `docs/`, `.github/`: what each already says.
+- `git remote get-url origin`: the forge. The host `github.com`, or any host that `gh auth status --hostname <host>` confirms (GitHub Enterprise), means GitHub. Any other host that `glab auth status --hostname <host>` confirms means GitLab. Ask the user only when neither CLI knows the host. Take the `<owner>/<repo>` or project path from the same URL for template links and CLI commands.
+- `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, `docs/`, and `.github/` on GitHub or `.gitlab/` on GitLab: what each already says.
 - `GLOSSARY.md` or another glossary file, and its layout.
 - Languages, the test runner, and the build, test, and lint commands that CI or the manifest runs.
 - The top-level package or folder layout, and whether it has a layer order.
