@@ -10,7 +10,7 @@ Issues for this repo live as GitLab issues. Use the `glab` CLI for all operation
 - Comment on an issue: `glab issue note <number> --message "..."`. GitLab calls comments notes.
 - Apply or remove labels: `glab issue update <number> --label "..."` / `--unlabel "..."`.
 - Close: `glab issue close <number>` takes no comment. Post the closing text first with `glab issue note`, then close.
-- Merge requests: GitLab calls PRs merge requests (MRs). `gh pr create`, `gh pr view`, and `gh pr merge` map to `glab mr create`, `glab mr view`, and `glab mr merge`; `gh pr comment` maps to `glab mr note`, and its `--body` flag maps to `--message`. Create an MR as a draft with `glab mr create --draft`.
+- Merge requests: GitLab calls PRs merge requests (MRs). `gh pr create`, `gh pr view`, and `gh pr merge` map to `glab mr create`, `glab mr view`, and `glab mr merge`; `gh pr comment` maps to `glab mr note create`, and its `--body` flag maps to `--message`. Create an MR as a draft with `glab mr create --draft`.
 
 GitLab numbers issues (`#n`) and MRs (`!n`) separately. Write `!n` for an MR and `#n` for an issue.
 
@@ -47,7 +47,7 @@ When set to `yes`, MRs run through the same labels and states as issues, using t
 
 - Read an MR: `glab mr view <number> --comments` and `glab mr diff <number>` for the diff.
 - List external MRs for triage: `glab mr list --output json`, then keep only MRs whose author is not a project member or owner (a contributor's MR, not a maintainer's in-flight work).
-- Comment, label, close: `glab mr note`, `glab mr update --label` / `--unlabel`, `glab mr close`.
+- Comment, label, close: `glab mr note create <number> --message "..."`, `glab mr update --label` / `--unlabel`, `glab mr close`.
 
 ## When a skill says "publish to the issue tracker"
 
