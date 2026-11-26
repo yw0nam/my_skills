@@ -70,7 +70,10 @@ After install, restart the CLI. To update: `claude plugin marketplace update` th
 
 | Name | What it does |
 |---|---|
-| `dev-workflow` | Three skills: `dev-workflow`, the orchestrated workflow for code work from survey to merge; `spec-review`, a gate where a fresh reviewer asks of every spec item whether it is YAGNI, whether it pays for its code, and whether a simpler path exists; and `setup-repo`, which writes the engineering principles, testing rules, tracker conventions, GitHub templates, and optional CI gates into a repository (`/dev-workflow:setup-repo` on Claude Code). Installing it on Claude Code installs the skills the workflow names |
+| `dev-workflow` | Three skills: `dev-workflow`, the orchestrated workflow for code work from survey to merge; `spec-review`, a gate where a fresh reviewer asks of every spec item whether it is YAGNI, whether it pays for its code, and whether a simpler path exists; and `setup-repo`, which writes the engineering principles, testing rules, tracker conventions, GitHub or GitLab templates, and optional CI gates into a repository (`/dev-workflow:setup-repo` on Claude Code). Installing it on Claude Code installs the skills the workflow names |
+
+`dev-workflow` supports GitHub and GitLab repositories; each repository's `docs/agents/issue-tracker.md` names its forge and CLI (`gh` or `glab`).
+
 ## Layout
 
 ```
