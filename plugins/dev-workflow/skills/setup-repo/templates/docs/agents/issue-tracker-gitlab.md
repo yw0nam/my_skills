@@ -65,5 +65,5 @@ Used by `/wayfinder`. The **map** is a single issue with **child** issues as tic
 - **Child ticket**: an issue carrying `Part of #<map>` at the top of its description and labels `wayfinder:<type>` (`research`/`prototype`/`grilling`/`task`). Once claimed, the ticket is assigned to the driving dev.
 - **Blocking**: the free plan has no native blocking link, so a `Blocked by: #<n>, #<n>` line at the top of the child's description records it. A ticket is unblocked when every blocker is closed.
 - **Frontier query**: `glab issue list --output json` scoped to the map's children. Drop any with an open issue named in its `Blocked by` line, or with an assignee; the first in map order wins.
-- **Claim**: `glab issue update <n> --assignee @me`, the session's first write.
+- **Claim**: `glab issue update <n> --assignee <your username>`, the session's first write. The username comes from `glab auth status`.
 - **Resolve**: `glab issue note <n> --message "<answer>"`, then `glab issue close <n>`, then append a context pointer (gist + link) to the map's Decisions-so-far.
